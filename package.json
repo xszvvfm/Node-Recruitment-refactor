@@ -1,0 +1,29 @@
+{
+  "name": "Node-Recruitment-refactor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:xszvvfm/Node-Recruitment-refactor.git",
+  "author": "xszvvfm <bce0102@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.15.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "joi": "^17.13.1",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.3",
+    "prettier": "^3.3.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "eslint": "9.x",
+    "globals": "^15.4.0",
+    "prisma": "^5.15.0"
+  }
+}
