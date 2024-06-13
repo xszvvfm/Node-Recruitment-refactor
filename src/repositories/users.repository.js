@@ -5,6 +5,14 @@ export class UsersRepository {
     // ORM인 Prisma에서 User 모델의 findFirst 메서드를 사용해 데이터 요청
     const user = await prisma.user.findFirst({
       where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        createdAt: true,
+        updatedAt: true,
+        password: false,
+      },
     });
 
     return user;
