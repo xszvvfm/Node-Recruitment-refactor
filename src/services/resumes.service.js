@@ -1,5 +1,6 @@
 import { ResumesRepository } from '../repositories/resumes.repository.js';
 import { MESSAGES } from '../constants/message.constant.js';
+import { HttpError } from '../errors/http.error.js';
 
 export class ResumesService {
   resumesRepository = new ResumesRepository();
@@ -65,7 +66,7 @@ export class ResumesService {
     const resume = await this.resumesRepository.findResumeById(authorId, id);
 
     if (!resume) {
-      throw new Error(MESSAGES.RESUMES.COMMON.NOT_FOUND);
+      throw new HttpError.NotFound(MESSAGES.RESUMES.COMMON.NOT_FOUND);
     }
 
     await this.resumesRepository.updateResume(authorId, id, title, content);
