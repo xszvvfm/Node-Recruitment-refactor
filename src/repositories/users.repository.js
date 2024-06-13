@@ -10,4 +10,24 @@ export class UsersRepository {
 
     return user;
   };
+
+  findUserByEmail = async (email) => {
+    const user = await prisma.user.findFirst({
+      where: { email },
+    });
+
+    return user;
+  };
+
+  createUser = async (email, password, name) => {
+    const createdUser = await prisma.user.create({
+      data: {
+        email,
+        password,
+        name,
+      },
+    });
+
+    return createdUser;
+  };
 }
