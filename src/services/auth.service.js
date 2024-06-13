@@ -1,6 +1,11 @@
 import { UsersRepository } from '../repositories/users.repository.js';
 import bcrypt from 'bcrypt';
-import { HASH_SALT_ROUNDS } from '../constants/auth.constant.js';
+import jwt from 'jsonwebtoken';
+import {
+  ACCESS_TOKEN_EXPIRES_IN,
+  HASH_SALT_ROUNDS,
+} from '../constants/auth.constant.js';
+import { ACCESS_TOKEN_SECRET } from '../constants/env.constant.js';
 
 export class AuthService {
   usersRepository = new UsersRepository();
@@ -31,5 +36,25 @@ export class AuthService {
       createdAt: createdUser.createdAt,
       updatedAt: createdUser.updatedAt,
     };
+  };
+
+  /** 로그인 API **/
+  signIn = async (email, password) => {
+    const user = await this.usersRepository.findUserByEmail(email);
+
+    const isPasswordMatched =
+      user && bcrypt.compareSync(password, user.password);
+
+    if (!user || !isPasswordMatched) {
+      throw new Error('인증 정보가 유효하지 않습니다.');
+    }
+
+    const payload = { id: user.id };
+
+    const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
+      expiresIn: ACCESS_TOKEN_EXPIRES_IN,
+    });
+
+    return { accessToken };
   };
 }

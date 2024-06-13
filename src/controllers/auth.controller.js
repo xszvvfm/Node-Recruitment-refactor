@@ -21,4 +21,21 @@ export class AuthController {
       next(err);
     }
   };
+
+  /** 로그인 API **/
+  signIn = async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+
+      const accessToken = await this.authService.signIn(email, password);
+
+      return res.status(HTTP_STATUS.OK).json({
+        status: HTTP_STATUS.OK,
+        message: MESSAGES.AUTH.SIGN_IN.SUCCEED,
+        data: accessToken,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
 }
