@@ -12,8 +12,8 @@ export class UsersController {
     try {
       const { userId } = req.user;
 
-      // Service 계층에 구현된 findUser 로직 실행
-      const user = await this.usersService.findUser(userId); // UsersController 클래스의 usersService 인스턴스에서 findUser 메서드를 호출
+      // Service 계층에 구현된 findUserById 로직 실행
+      const user = await this.usersService.findUserById(userId); // UsersController 클래스의 usersService 인스턴스에서 findUserById 메서드를 호출
 
       return res.status(HTTP_STATUS.OK).json({
         status: HTTP_STATUS.OK,
